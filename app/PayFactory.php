@@ -15,6 +15,8 @@ use App\classes\PayCreditAdapter;
 use App\classes\PayCreditCard;
 use App\classes\PayEvening;
 use App\classes\PayMorning;
+use App\classes\PayWithCytonnAcccount;
+use App\classes\PayWithCytonnAcccountAdapter;
 
 class PayFactory
 {
@@ -23,17 +25,17 @@ class PayFactory
     {
         switch ($amount) {
 
-            case ($amount <= 500):
+            case ($amount <= 300):
 
-                if (date("H") < 12)
+                if (date("h") < 12)
                 {
                     $cash = new PayCash();
                     return new PayMorning($cash);
-                } elseif (date("H") > 11 && date("H") < 18)
+                } elseif (date("h") > 12 && date("h") < 18)
                 {
                     $cash = new PayCash();
                     return new PayAfterNoon($cash);
-                } elseif (date("H") > 17)
+                } elseif (date("h") > 18)
                 {
                     $cash = new PayCash();
                     return new PayEvening($cash);
@@ -41,9 +43,14 @@ class PayFactory
 
                 break;
 
-            case ($amount > 500):
+            case ($amount > 300 && $amount < 1000):
 
                 return new PayCreditAdapter(new PayCreditCard());
+                break;
+
+            case ($amount > 1000):
+
+                return new PayWithCytonnAcccountAdapter(new PayWithCytonnAcccount());
                 break;
 
             default:
