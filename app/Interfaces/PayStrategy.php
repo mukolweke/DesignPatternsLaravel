@@ -12,5 +12,4 @@ namespace App\Interfaces;
 interface PayStrategy
 {
     public function pay($amount);
-    public function getStrategy();
 }

@@ -8,20 +8,12 @@
 
 namespace App\classes;
 
-
 use App\Interfaces\PayStrategy;
 
-class PayCreditCard implements PayStrategy
+class PayCreditCard
 {
-
-    private $accountNumber = '';
-
-    public function pay($amount = 0) {
+    public function sendPayment($amount = 0)
+    {
         echo "Paying ". $amount. " using Credit Card";
     }
-
-    public function getStrategy(){
-        return "CREDIT CARD";
-    }
-
 }
