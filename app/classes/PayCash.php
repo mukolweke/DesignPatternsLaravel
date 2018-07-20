@@ -8,18 +8,12 @@
 
 namespace App\classes;
 
-
 use App\Interfaces\PayStrategy;
 
 class PayCash implements PayStrategy
 {
-
-    public function pay($amount = 0) {
+    public function pay($amount = 0)
+    {
         echo "Paying ". $amount. " using Cash";
     }
-
-    public function getStrategy(){
-        return "CASH";
-    }
-
 }
